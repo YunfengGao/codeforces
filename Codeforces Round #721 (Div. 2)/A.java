@@ -6,6 +6,12 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
+/**
+ * n & (n−1) & (n−2) & (n−3) & ... (k) = 0
+ * 找到最大的k使等式成立
+ *
+ * 直接暴力也挺快的
+ */
 public class A {
 
     public static void main(String[] args) {
@@ -20,6 +26,15 @@ public class A {
 
     static class Solver {
         void solve(InputReader in, PrintWriter out) {
+            int t = in.nextInt();
+            while (t-- > 0) {
+                long ans = in.nextLong();
+                long i;
+                for (i = ans - 1; ans != 0; i--) {
+                    ans &= i;
+                }
+                out.println(i + 1);
+            }
         }
     }
 
@@ -45,6 +60,10 @@ public class A {
 
         int nextInt() {
             return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
         }
 
     }
