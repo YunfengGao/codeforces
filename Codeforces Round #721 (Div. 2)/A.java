@@ -10,7 +10,28 @@ import java.util.StringTokenizer;
  * n & (n−1) & (n−2) & (n−3) & ... (k) = 0
  * 找到最大的k使等式成立
  *
- * 直接暴力也挺快的
+ * 直接暴力也挺快的 —— 超时了
+ * --------------------------------------------
+ * 再想想：
+ * 如果一个值要变成0，那个这个值的各个位都要变成0
+ * 相对其他位，最高位一定是最后变成0的
+ * 而且最高位变成0后，其他位都至少已经变成0一次了
+ * 所以计算什么时候最高位变成0就行了
+ *
+ * 如果一个数有n位，第n位变成0是在首位为0，剩余n-1位为1
+ * 既：pow(2, n-1) - 1
+ *
+ * 1001
+ * 1000
+ * 0111   7
+ * 0110
+ * 0101
+ * 0100
+ * 0011   3
+ * 0010
+ * 0001
+ *
+ *
  */
 public class A {
 
@@ -29,11 +50,8 @@ public class A {
             int t = in.nextInt();
             while (t-- > 0) {
                 long ans = in.nextLong();
-                long i;
-                for (i = ans - 1; ans != 0; i--) {
-                    ans &= i;
-                }
-                out.println(i + 1);
+                String binary = Long.toBinaryString(ans);
+                out.println((1 << (binary.length() - 1)) - 1);
             }
         }
     }
