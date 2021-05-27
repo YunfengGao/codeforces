@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +36,7 @@ import java.util.StringTokenizer;
  * 正数也不能随便选，有可能两个非正数间的距离，小于这个正数
  * 还是得全记录下来排序，维护最小距离，有小于等于这个最小距离得正数，再+1
  *
- *
+ * 117512099	May/27/2021 23:29UTC+8	gyf1995	B - Sifid and Strange Subsequences	Java 8	Accepted	124 ms	0 KB
  */
 public class B1529 {
 
@@ -54,24 +55,27 @@ public class B1529 {
             int t = in.nextInt();
             while (t-- > 0) {
                 int n = in.nextInt();
+                int[] a = new int[n];
                 int ans = 0;
-                boolean first = true;
-                boolean hasEqualNumber = false;
-                Set<Integer> set = new HashSet<>(n);
                 for (int i = 0; i < n; i++) {
-                    int temp = in.nextInt();
-                    if (temp <= 0) {
-                        if(set.contains(temp)) {
-                            hasEqualNumber = true;
-                        }
-                        set.add(temp);
+                    a[i] = in.nextInt();
+                    if (a[i] <= 0) {
                         ans++;
-                    } else {
-                        first = false;
                     }
                 }
-                if (!first && !hasEqualNumber) {
-                    ans++;
+                Arrays.sort(a);
+                int minLength = Integer.MAX_VALUE;
+                for (int i = 1; i < n; i++) {
+                    minLength = Math.min(minLength, a[i] - a[i - 1]);
+                    if (a[i] > 0) {
+                        if (a[i] <= minLength) {
+                            ans++;
+                        }
+                        break;
+                    }
+                }
+                if (ans == 0 && a[0] > 0) {
+                    ans = 1;
                 }
                 out.println(ans);
             }
