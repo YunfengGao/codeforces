@@ -1,2 +1,2 @@
 # codeforces
-codeforces代码仓库
+脑洞大开
