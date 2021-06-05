@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class A110 {
+public class A1535 {
 
     public static void main(String[] args) {
         InputStream inputStream = System.in;
