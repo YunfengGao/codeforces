@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class B110 {
+public class B1535 {
 
     public static void main(String[] args) {
         InputStream inputStream = System.in;
