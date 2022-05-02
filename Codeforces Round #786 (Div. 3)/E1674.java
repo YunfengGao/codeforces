@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class E1674 {
-
     public static void main(String[] args) {
         InputStream inputStream = System.in;
         OutputStream outputStream = System.out;
@@ -29,12 +28,11 @@ public class E1674 {
             int ans = Integer.MAX_VALUE;
             // 敲两个相邻的
             for (int i = 0; i < n - 1; i++) {
-                int temp = a[i] + a[i + 1];
-                ans = Math.min(ans, upper(temp, 3));
+                ans = Math.min(ans, this.attackBeside(a[i], a[i + 1]));
             }
             // 靠溅射伤害
             for (int i = 1; i < n - 1; i++) {
-                ans = Math.min(ans, this.attackBeside(a[i - 1], a[i + 1]));
+                ans = Math.min(ans, this.attackTwoSide(a[i - 1], a[i + 1]));
             }
             // 单独敲两块不相邻的
             Arrays.sort(a);
@@ -44,6 +42,19 @@ public class E1674 {
         }
 
         private int attackBeside(int a, int b) {
+            if (a > b) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            // 先把高生命压低
+            int large = (b - a) / 2;
+            b -= large * 2;
+            a -= large;
+            return upper(a + b, 3) + large;
+        }
+
+        private int attackTwoSide(int a, int b) {
             if (a > b) {
                 int temp = a;
                 a = b;
