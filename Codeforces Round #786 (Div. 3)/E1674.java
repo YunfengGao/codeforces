@@ -34,13 +34,22 @@ public class E1674 {
             }
             // 靠溅射伤害
             for (int i = 1; i < n - 1; i++) {
-                ans = Math.min(ans, Math.max(a[i - 1], a[i + 1]));
+                ans = Math.min(ans, this.attackBeside(a[i - 1], a[i + 1]));
             }
             // 单独敲两块不相邻的
             Arrays.sort(a);
             ans = Math.min(ans, upper(a[0], 2) + upper(a[1], 2));
 
             out.println(ans);
+        }
+
+        private int attackBeside(int a, int b) {
+            if (a > b) {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+            return a + upper(b - a, 2);
         }
 
         private int upper(int a, int b) {
