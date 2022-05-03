@@ -47,11 +47,18 @@ public class E1674 {
                 a = b;
                 b = temp;
             }
+            if (a * 2 < b) {
+                return upper(b, 2);
+            } else {
+                return upper(a + b, 3);
+            }
             // 先把高生命压低
-            int large = (b - a) / 2;
-            b -= large * 2;
-            a -= large;
-            return upper(a + b, 3) + large;
+//            int large = (b - a) / 2;
+//            b -= large * 2;
+            // 不能减少到负数
+//            a -= large;
+            // 如果小墙减成0，大墙就不能减3了，要减2
+//            return upper(a + b, 3) + large;
         }
 
         private int attackTwoSide(int a, int b) {
